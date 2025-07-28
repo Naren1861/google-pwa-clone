@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Google Clone</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#4285f4" />
+</head>
+<body>
+  <div class="theme-toggle">
+    <label>
+      <input type="checkbox" id="themeSwitcher" />
+      🌙 Dark Mode
+    </label>
+  </div>
+
+  <div class="container">
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google Logo" class="logo"/>
+
+    <form action="https://www.google.com/search" method="GET" class="search-box" onsubmit="saveSearch(event)">
+      <input type="text" name="q" id="searchInput" placeholder="Search Google or type a URL" required />
+      <div class="buttons">
+        <button type="submit">Google Search</button>
+        <button type="button" onclick="feelingLucky()">I'm Feeling Lucky</button>
+      </div>
+    </form>
+
+    <div class="history">
+      <h3>Recent Searches:</h3>
+      <ul id="historyList"></ul>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('Service worker registered', reg))
+          .catch(err => console.error('Service worker failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>
